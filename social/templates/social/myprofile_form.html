@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} Profile Edit{% endblock %}
+{% block blogactive %}active{% endblock blogactive %}
+{% block content %}
+
+{% load crispy_forms_tags %}<!-- Load bootstrap to this tag-->
+
+<div class="container mt-2"> 
+<h3>Edit Your Profile</h3>
+<form enctype="multipart/form-data" method="post" > {% csrf_token %}
+<!-- Default All Field Disply that time remove comment-->
+{{ form | crispy}}
+
+{% comment %} 
+<div class="form-row">
+<div class="form-group col-md-6">
+        {{ form.name|as_crispy_field }}
+</div>
+<div class="form-group col-md-6">
+        {{ form.phone|as_crispy_field }}
+</div>
+<div class="form-group col-md-6">
+        {{ form.address|as_crispy_field }}
+</div>
+<div class="form-group col-md-6">
+        {{ form.branch|as_crispy_field }}
+</div>
+<div class="form-group col-md-6">
+        {{ form.image|as_crispy_field }}
+</div>
+<div class="form-group col-md-6">
+        {{ form.resume|as_crispy_field }}
+</div>
+     </div> 
+{% endcomment %}
+     
+  <button type="submit" class="btn btn-success btn-lg ">Update</button>
+ 
+</form>
+
+</div>
+
+ {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} My Profiles {% endblock %}
+{% block myprofileactive %}active{% endblock myprofileactive %}
+{% block content %} 
+
+
+ <div class="container mt-2"> 
+ <h3>All Prlofiles </h3> 
+<form method="get" class="form-inline" >    
+    <input type="text" value="{{request.GET.uq}}" name="uq" class="form-control mr-2" placeholder="Search" required> 
+    <button type="submit" class="btn btn-success mr-5">Search</button>    
+</form>
+ <div class="row mt-3 bg-success">
+  <div class="col sm-3 ">Name</div>
+  <div class="col sm-3">Age</div>
+  <div class="col sm-3">Gender</div>
+  <div class="col sm-3">Action</div>
+</div>
+  {% for item in myprofile_list %} 
+  <div class="row my-2">
+  <div class="col sm-3 ">{{item.name}}</div>
+  <div class="col sm-3">{{item.age}}</div>
+  <div class="col sm-3">{{item.gender}}</div>
+  <div class="col sm-3">
+  <a href="/social/profile/{{item.id}}" class="btn btn-primary sm-mr-2">More</a>
+  {% if item.followed %}
+    <a href="/social/profile/unfollow/{{item.id}}" class="btn btn-danger">UnFollow</a>
+  {% else %}
+  <a href="/social/profile/follow/{{item.id}}" class="btn btn-primary">Follow</a>
+  {% endif %}
+  </div>
+      
+         </div>
+  {% endfor %}  
+ 
+</div> 
+
+{% endblock %}

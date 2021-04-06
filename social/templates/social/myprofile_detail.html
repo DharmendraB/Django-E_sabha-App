@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %} Profile Detail {% endblock %}
+
+
+{% block content %} 
+<div class="container">
+<div class="row mt-4">
+    <div class="col-sm-6 blog-main">
+        
+        <h4 class="font-italic">Name: {{myprofile.name}}</h4>
+        <h4 class="font-italic">Age: {{myprofile.age}}</h4>
+        <h4 class="font-italic">Gender: {{myprofile.gender}}</h4>
+        <h4 class="font-italic">Status: {{myprofile.status}}</h4>        
+        <div class="blog-post">              
+        <br> 
+        <p align="justify" > <strong>Address:</strong> <br>{{myprofile.address}}</p>
+        <p align="justify"  ><strong>Description:</strong><br>{{myprofile.description}}</p>
+       
+    </div><!-- /.blog-main -->
+   
+</div>
+    <aside class="col-sm-6 blog-sidebar">
+      <div class="p-4 md-3 bg-light rounded">
+        <div class="text-center">
+           <img src="/media/{{myprofile.image}}" class="rounded mx-auto d-block img-fluid" alt="{{myprofile.name}}">   
+        </div>
+        </div>      
+    </aside><!-- /.blog-sidebar -->
+
+  </div>
+    <a href="/social/profile" class="btn btn-primary"> Back to ProfileList</a>
+
+</div>
+ {% endblock %}

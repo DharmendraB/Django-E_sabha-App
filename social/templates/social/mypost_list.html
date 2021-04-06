@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %} My Post {% endblock %}
+{% block mypostactive %}active{% endblock mypostactive %}
+{% block content %} 
+
+
+ <div class="container mt-2"> 
+ <h3>My Post </h3> 
+<form method="get" class="form-inline" >    
+    <input type="text" value="{{request.GET.uq}}" name="uq" class="form-control mr-2" placeholder="Search" required> 
+    <button type="submit" class="btn btn-success mr-5">Search</button>
+    <a href="/social/mypost/create/" class="btn btn-success mx-5">  Add New Post </a>
+</form>
+ <div class="row mt-3">
+  {% for item in mypost_list %} 
+    <div class="col-md-12">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row  shadow-sm h-md-250 position-relative">
+        <div class="col-auto d-none d-lg-block">        
+            <img src="/media/{{item.image}}" class="bd-placeholder-img" width="200" height="250" alt="{{item.title}}" />
+            <title>{{item.subject}}</title><rect width="100%" height="100%" fill="#55595c"></rect>            
+         </div>
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary"> <a href="/blog/{{item.id}}"> {{item.title}} </a> </strong>
+              <h3 class="mb-0">{{item.subject | truncatechars:100 }}</h3>
+              <div class="mb-1 text-muted">{{item.pub_date}} by {{item.uploaded_by}}</div>
+              <p  class="card-text mb-auto" align="justify">{{item.msg | truncatechars:500}}</p>
+              <div class="mt-2">
+              <a href="/social/mypost/{{item.id}}" class="btn btn-primary mr-2">Continue reading</a>
+              <a href="/social/mypost/edit/{{item.id}}" class="btn btn-dark">Edit This Post</a>
+              <a href="/social/mypost/delete/{{item.id}}" class="btn btn-danger">Delete This Post</a>
+                </div>
+            </div>        
+          
+        </div>
+      </div> 
+      
+         
+  {% endfor %} 
+  
+  </div> 
+
+</div> 
+
+{% endblock %}

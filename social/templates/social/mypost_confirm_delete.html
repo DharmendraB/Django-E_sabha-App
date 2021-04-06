@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}<!-- Load bootstrap to this tag-->
+
+<div class="container mt-2"> 
+<h3>Are You Sure !!</h3>
+<form enctype="multipart/form-data" method="post" > {% csrf_token %}
+<!-- Default All Field Disply that time remove comment-->
+{{ form | crispy}}
+
+<button type="submit" class="btn btn-danger btn-lg ">Delete</button>  <strong> OR </strong>
+<a href="/social/mypost" class="btn btn-primary"> Back to PostList</a>
+</form>
+</div>
+ {% endblock %}

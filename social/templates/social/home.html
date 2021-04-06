@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %} dbTechnical Home {% endblock %}
+
+{% block homeactive %}active{% endblock homeactive %}
+{% block content %}
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1 class="display-3">Wellcome, dbTechnical!</h1>
+      <p>This is a template for a simple marketing or informational website. It includes a large callout called a
+        jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
+      </p>
+      <p><a class="btn btn-primary btn-lg" href="/blog" role="button">Go To Blog &raquo;</a></p>
+    </div>
+  </div>
+<div class="container">
+    <!-- Example row of columns -->
+   <div class="row">
+    <div class="col-md-12">
+      <h1 class="myhead2">E Sabha</h1>
+      <hr>
+      <form method="get" class="form-inline" >    
+    <input type="text" value="{{request.GET.uq}}" name="uq" class="form-control mr-sm-2" placeholder="Search" required> 
+    <button type="submit" class="btn btn-success my-2 my-sm-0">Search</button>
+    <a href="/social/mypost/create/" class="btn btn-success mx-5">  Add New Post </a>
+</form>
+ <div class="row mt-3">
+  {% for item in mypost_list %} 
+    <div class="col-sm-12">
+      <div class="row no-gutters border rounded overflow-hidden flex-md-row  shadow-sm h-md-250 position-relative">
+        <div class="col-auto d-none d-lg-block">        
+            <img src="/media/{{item.image}}" class="bd-placeholder-img" width="200" height="250" alt="{{item.title}}" />
+            <title>{{item.subject}}</title><rect width="100%" height="100%" fill="#55595c"></rect>            
+         </div>
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary"> <a href="/blog/{{item.id}}"> {{item.title}} </a> </strong>
+              <h3 class="mb-0">{{item.subject | truncatechars:100 }}</h3>
+              <div class="mb-1 text-muted">{{item.pub_date}} by {{item.uploaded_by}}
+                  {% if item.uploaded_by.image %}
+                    <img src="/media/{{item.uploaded_by.image}}" class="rounded-circle " width="30px" height="30px" alt="{{item.uploaded_by}}" />
+                  {% endif %}
+              </div>
+              <p  class="card-text mb-auto" align="justify">{{item.msg | truncatechars:500}}</p>
+              <div class="mt-2">
+              <strong>Likes({{item.likecount}})</strong> 
+              {% if item.liked %}
+              <a href="/social/mypost/unlike/{{item.id}}" class="btn btn-danger mr-1">UnLike</a>              
+              {% else %}
+              <a href="/social/mypost/like/{{item.id}}" class="btn btn-primary mr-1">Like</a>
+              {% endif %}
+              <a href="/social/mypost/{{item.id}}" class="btn btn-primary mr-5">Continue reading</a>
+              {% if user.is_superuser %}
+              <a href="/social/mypost/delete/{{item.id}}" class="btn btn-danger mr-5">Delete This Post</a>
+              {% endif %}
+                </div>
+            </div>        
+          
+        </div>
+      </div>      
+         
+  {% endfor %} 
+    </div> 
+    </div>
+  </div>
+
+ 
+
+</main>
+{% endblock %}
